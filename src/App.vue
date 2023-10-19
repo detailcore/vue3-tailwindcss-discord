@@ -9,9 +9,9 @@
       <hr class="border-t-white/[.06] border-t-2 mx-2">
 
       <ServerLink 
-        v-for="{ id, alias, img } in servers" 
+        v-for="{ id, img } in servers" 
         :key="id"
-        :alias="alias"
+        :id="id"
       >
         <img :src="getImageUrl('assets/servers', img)" />
       </ServerLink>
@@ -27,7 +27,7 @@
 import { useMainStore } from './stores'
 import Discord from '@/components/icons/Discord.vue'
 import ServerLink from '@/components/ServerLink.vue'
-import { useUtils } from './composables/useUtils';
+import { useUtils } from './composables/useUtils'
 
 const { servers } = useMainStore()
 const { getImageUrl } = useUtils()

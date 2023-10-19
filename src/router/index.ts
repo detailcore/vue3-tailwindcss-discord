@@ -10,11 +10,11 @@ const routes = [
   },
   {
     name: 'server',
-    path: '/server/:alias',
+    path: '/server/:sid',
     component: () => import('@/views/Server.vue'),
     children: [{
       name: 'channels',
-      path: 'channels/:id',
+      path: 'channels/:cid',
       component: () => import('@/components/Channel.vue'),
     }]
   }

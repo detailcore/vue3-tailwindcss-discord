@@ -12,7 +12,7 @@
     </div>
     <div class="group-active:translate-y-px">
       <router-link 
-        :to="!alias ? { name: 'home' } : { name: 'server', params: { alias } }"
+        :to="!id ? { name: 'home' } : { name: 'server', params: { sid: id } }"
         :class="[
           isCurrent 
             ? 'rounded-2xl bg-brand text-white'
@@ -32,8 +32,8 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const props = defineProps({
-  alias: {
-    type: String,
+  id: {
+    type: Number,
     required: false,
   },
 })
@@ -41,6 +41,6 @@ const props = defineProps({
 const route = useRoute()
 
 const isCurrent = computed(() => {
-  return route.params?.alias == props.alias
+  return +route.params?.sid == props.id
 })
 </script>
