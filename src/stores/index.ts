@@ -1,25 +1,25 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import data from './dataOfServer.json'
-import { ICategory, IServer, IMain } from './index.interfaces'
+import { data } from './dataOfServer.js'
+import { ICategory, IServer, IMain, IBasic } from './index.interfaces'
+import { useRoute } from 'vue-router'
 
 
 export const useMainStore = defineStore('main', () => {
+  const route = useRoute()
+  const dataOfServer = ref<IMain>(data)
+
+  // Избыточные данные
   const servers = ref<IServer[]>([
     { id: 1, alias: 'tailwind', name: 'Tailwind', img: 'tailwind.png' },
     { id: 2, alias: 'mirage', name: 'Mirage', img: 'mirage.png' },
     { id: 3, alias: 'next', name: 'Next', img: 'next.png' },
   ])
-  // type TKeysOfServer = keyof typeof servers.value
 
-  const dataOfServer = ref<IMain>(data)
-
-  const getNameServerByAlias = (alias: string): string => {
-    for (const item of servers.value) {
-      if(item.alias == alias) return item.name
-    }
-    return 'Unnamed'
-  }
+  // @ts-ignore
+  const getServer = computed<IBasic>(() => dataOfServer.value[+route.params.sid])
+  const getServerName = computed<string>(() => getServer.value.label)
+  const getServerCategories = computed<ICategory[]>(() => getServer.value.categories)
 
   const setShowCategories = (categories: ICategory[]) => {
     categories.forEach(category => {
@@ -27,21 +27,22 @@ export const useMainStore = defineStore('main', () => {
     })
   }
 
-  const toggleCategory = (categoryId: number) => { // альтернативный вариант
-    // dataOfServer.value[1].categories.forEach(category => {
-    //   if(category.id == categoryId) {
-    //     category.isShow = !category.isShow
-    //     return
-    //   }
-    // })
+  const toggleCategory = (categoryId: number) => {
+    getServerCategories.value.forEach((category: ICategory) => {
+      if(category.id == categoryId) {
+        category.isShow = !category.isShow
+        return
+      }
+    })
   }
 
 
   return {
     servers,
-    dataOfServer,
 
-    getNameServerByAlias,
+    getServer,
+    getServerName,
+    getServerCategories,
 
     setShowCategories,
     toggleCategory,

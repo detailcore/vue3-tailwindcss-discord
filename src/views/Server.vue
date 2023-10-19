@@ -6,32 +6,29 @@
         <Verified class="absolute w-4 h-4 text-gray-550" />
         <Check class="absolute w-4 h-4" />
       </div>
-      {{ getNameServerByAlias(route.params?.alias as string) }}
+        {{ getServerName }}
       <Chevron class="w-[18px] h-[18px] ml-auto opacity-80" />
     </button>
 
     <div class="flex-1 overflow-y-scroll font-medium pt-3 space-y-[21px] text-gray-300">
-      <div v-for="(category, index) in dataOfServer[1].categories" :key="index">
+      <div v-for="(category, index) in getServerCategories" :key="index">
         <button 
           @click="toggleCategory(category.id)"
           v-if="category.label" 
           class="flex items-center px-0.5 text-sx font-title uppercase tracking-wide hover:text-gray-100 w-full transition duration-200">
-          <Arrow :class="[showCategoryIds.includes(category.id) ? '' : '-rotate-90', 'w-3 h-3 mr-0.5']" />
+          <Arrow :class="[category.isShow ? '' : '-rotate-90', 'w-3 h-3 mr-0.5']" />
           {{ category.label }}
         </button>
 
         <div 
-          v-for="channel in (
-            (category.channels).filter(item => {
-              let isOpen = showCategoryIds.includes(category.id)
-
-              return isOpen || item.unread
-            })
-          )"
+          v-for="channel in category.channels"
           :key="channel.id" 
           class="space-y-0.5 mt-[5px]"
         >
-          <ChannelLink :channel="channel" />
+          <ChannelLink
+            :channel="channel"
+            v-if="category.isShow || (channel.unread != undefined && channel.unread != false)"
+          />
         </div>
       </div>
 
@@ -52,27 +49,16 @@ import Verified from '@/components/icons/Verified.vue'
 
 import ChannelLink from '@/components/ChannelLink.vue'
 
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue-router'
 import { useMainStore } from '@/stores'
 
-const showCategoryIds = ref<number[]>([])
 
-const route = useRoute()
-const { dataOfServer } = storeToRefs(useMainStore())
-const { getNameServerByAlias } = useMainStore()
+const { getServerName, getServerCategories } = storeToRefs(useMainStore())
+const { setShowCategories, toggleCategory } = useMainStore()
 
-const toggleCategory = (id: number) => {
-  if(!showCategoryIds.value.includes(id)) {
-    showCategoryIds.value.push(id)
-  } else {
-    showCategoryIds.value = showCategoryIds.value.filter(i => i != id)
-  }
-}
 
 onMounted(() => {
-  // setShowCategories(dataOfServer.value[1].categories) // альтернативный вариант
-  showCategoryIds.value = dataOfServer.value[1].categories.map(i => i.id)
+  setShowCategories(getServerCategories.value)
 })
 </script>

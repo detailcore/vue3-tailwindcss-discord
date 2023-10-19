@@ -3,9 +3,18 @@ export interface IItem {
   label: string
 }
 
+export interface IMessage {
+  user: string
+  date: string
+  text: string
+  avatarUrl: string
+}
+
 export interface IChannel extends IItem {
   icon?: string
   unread?: boolean
+  messages: IMessage[]
+  description?: string
 }
 
 export interface ICategory extends IItem {
@@ -13,11 +22,16 @@ export interface ICategory extends IItem {
   channels: IChannel[]
 }
 
+export interface IBasic {
+  label: string
+  img?: string
+  categories: ICategory[]
+}
+
 export interface IMain {
-  '1': {
-    label: string
-    categories: ICategory[]
-  }
+  1: IBasic
+  2: IBasic
+  3: IBasic
 }
 
 export interface IServer {
