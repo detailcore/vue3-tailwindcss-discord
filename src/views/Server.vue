@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-800 w-60 flex flex-col">
+  <div class="bg-gray-800 w-60 flex-col hidden md:flex">
     <button
       class="px-4 h-12 shadow-sm flex items-center font-title font-semibold text-white text-[15px] hover:bg-gray-550/[0.16] transition">
       <div class="relative w-4 h-4 mr-1">
@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="bg-gray-700 flex flex-1 flex-col">
+  <div class="bg-gray-700 flex flex-1 flex-col flex-shrink min-w-0">
     <RouterView />
   </div>
 </template>

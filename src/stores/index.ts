@@ -38,6 +38,7 @@ export const useMainStore = defineStore('main', () => {
 
 
   return {
+    dataOfServer,
     servers,
 
     getServer,

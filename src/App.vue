@@ -1,7 +1,7 @@
 <template>
   <div class="flex text-gray-100 h-screen">
 
-    <div class="bg-gray-900 p-3 space-y-2 overflow-y-scroll">
+    <div class="bg-gray-900 p-3 space-y-2 overflow-y-scroll hidden md:block">
       <ServerLink name="home">
         <Discord class="w-7 h-5" />
       </ServerLink>

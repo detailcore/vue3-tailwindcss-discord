@@ -11,8 +11,8 @@
       ></div>
     </div>
     <div class="group-active:translate-y-px">
-      <router-link 
-        :to="!id ? { name: 'home' } : { name: 'server', params: { sid: id } }"
+      <button
+        @click="goToDefChannel()"
         :class="[
           isCurrent 
             ? 'rounded-2xl bg-brand text-white'
@@ -21,15 +21,17 @@
         ]"
       >
         <slot></slot>
-      </router-link>
+      </button>
     </div>
   </div>
 </template>
 
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useMainStore } from '@/stores'
 
 const props = defineProps({
   id: {
@@ -39,8 +41,19 @@ const props = defineProps({
 })
 
 const route = useRoute()
+const router = useRouter()
+const { dataOfServer } = storeToRefs(useMainStore())
 
 const isCurrent = computed(() => {
   return +route.params?.sid == props.id
 })
+
+const goToDefChannel = () => {
+  if(!props.id) {
+    router.push({ path: '/' })
+  } else {
+    //@ts-ignore
+    router.push({ path: `/server/${props.id}/channels/${dataOfServer.value[props.id].categories[0].channels[0].id}` })
+  }
+}
 </script>
