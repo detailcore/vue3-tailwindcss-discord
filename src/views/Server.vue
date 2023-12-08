@@ -1,45 +1,41 @@
 <template>
-  <div class="bg-gray-800 w-60 flex-col hidden md:flex">
+  <div class="hidden w-60 flex-col bg-gray-800 md:flex">
     <button
-      class="px-4 h-12 shadow-sm flex items-center font-title font-semibold text-white text-[15px] hover:bg-gray-550/[0.16] transition">
-      <div class="relative w-4 h-4 mr-1">
-        <Verified class="absolute w-4 h-4 text-gray-550" />
-        <Check class="absolute w-4 h-4" />
+      class="flex h-12 items-center px-4 font-title text-[15px] font-semibold text-white shadow-sm transition hover:bg-gray-550/[0.16]"
+    >
+      <div class="relative mr-1 h-4 w-4">
+        <Verified class="absolute h-4 w-4 text-gray-550" />
+        <Check class="absolute h-4 w-4" />
       </div>
-        {{ getServerName }}
-      <Chevron class="w-[18px] h-[18px] ml-auto opacity-80" />
+      {{ getServerName }}
+      <Chevron class="ml-auto h-[18px] w-[18px] opacity-80" />
     </button>
 
-    <div class="flex-1 overflow-y-scroll font-medium pt-3 space-y-[21px] text-gray-300">
+    <div class="flex-1 space-y-[21px] overflow-y-scroll pt-3 font-medium text-gray-300">
       <div v-for="(category, index) in getServerCategories" :key="index">
-        <button 
+        <button
+          v-if="category.label"
+          class="text-sx flex w-full items-center px-0.5 font-title uppercase tracking-wide transition duration-200 hover:text-gray-100"
           @click="toggleCategory(category.id)"
-          v-if="category.label" 
-          class="flex items-center px-0.5 text-sx font-title uppercase tracking-wide hover:text-gray-100 w-full transition duration-200">
-          <Arrow :class="[category.isShow ? '' : '-rotate-90', 'w-3 h-3 mr-0.5']" />
+        >
+          <Arrow :class="[category.isShow ? '' : '-rotate-90', 'mr-0.5 h-3 w-3']" />
           {{ category.label }}
         </button>
 
-        <div 
-          v-for="channel in category.channels"
-          :key="channel.id" 
-          class="space-y-0.5 mt-[5px]"
-        >
+        <div v-for="channel in category.channels" :key="channel.id" class="mt-[5px] space-y-0.5">
           <ChannelLink
-            :channel="channel"
             v-if="category.isShow || (channel.unread != undefined && channel.unread != false)"
+            :channel="channel"
           />
         </div>
       </div>
-
     </div>
   </div>
 
-  <div class="bg-gray-700 flex flex-1 flex-col flex-shrink min-w-0">
+  <div class="flex min-w-0 flex-1 flex-shrink flex-col bg-gray-700">
     <RouterView />
   </div>
 </template>
-
 
 <script setup lang="ts">
 import Arrow from '@/components/icons/Arrow.vue'
@@ -53,10 +49,8 @@ import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/stores'
 
-
 const { getServerName, getServerCategories } = storeToRefs(useMainStore())
 const { setShowCategories, toggleCategory } = useMainStore()
-
 
 onMounted(() => {
   setShowCategories(getServerCategories.value)

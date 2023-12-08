@@ -4,7 +4,6 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import { IMessage } from '@/stores/index.interfaces'
 

@@ -3,7 +3,7 @@
     "paths": {
       "@/*": [
         "./src/*" // set path `@/*` as alias of `src/*`
-      ],
+      ]
     },
 
     "target": "ES2020",

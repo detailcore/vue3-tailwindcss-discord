@@ -10,59 +10,58 @@
   -webkit-text-size-adjust: 100%;
 } */
 
-
 @font-face {
   font-family: 'Whitney';
-  src: url('./fonts/whitney/Whitney-Light.woff') format("woff");
+  src: url('./fonts/whitney/Whitney-Light.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Whitney';
-  src: url('./fonts/whitney/Whitney-Book.woff') format("woff");
+  src: url('./fonts/whitney/Whitney-Book.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Whitney';
-  src: url('./fonts/whitney/Whitney-Medium.woff') format("woff");
+  src: url('./fonts/whitney/Whitney-Medium.woff') format('woff');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Whitney';
-  src: url('./fonts/whitney/Whitney-Semibold.woff') format("woff");
+  src: url('./fonts/whitney/Whitney-Semibold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Ginto';
-  src: url('./fonts/ginto/Ginto-Light.ttf') format("ttf");
+  src: url('./fonts/ginto/Ginto-Light.ttf') format('ttf');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Ginto';
-  src: url('./fonts/ginto/Ginto-Regular.ttf') format("ttf");
+  src: url('./fonts/ginto/Ginto-Regular.ttf') format('ttf');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Ginto';
-  src: url('./fonts/ginto/Ginto-Medium.ttf') format("ttf");
+  src: url('./fonts/ginto/Ginto-Medium.ttf') format('ttf');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Ginto';
-  src: url('./fonts/ginto/Ginto-Bold.ttf') format("ttf");
+  src: url('./fonts/ginto/Ginto-Bold.ttf') format('ttf');
   font-weight: 700;
   font-style: normal;
 }

@@ -1,31 +1,30 @@
 <template>
-  <div class="relative block group">
-    <div class="absolute -left-3 h-full flex items-center">
+  <div class="group relative block">
+    <div class="absolute -left-3 flex h-full items-center">
       <div
         :class="[
           isCurrent
             ? 'h-10'
-            : 'h-5 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100',
-          'w-1 bg-white rounded-r origin-left transition-all duration-200'
+            : 'h-5 scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100',
+          'w-1 origin-left rounded-r bg-white transition-all duration-200',
         ]"
       ></div>
     </div>
     <div class="group-active:translate-y-px">
       <button
-        @click="goToDefChannel()"
         :class="[
-          isCurrent 
+          isCurrent
             ? 'rounded-2xl bg-brand text-white'
-            : 'bg-gray-700 text-gray-100 rounded-3xl group-hover:bg-brand group-hover:text-white group-hover:cursor-pointer group-hover:rounded-2xl',
-          'w-12 h-12 flex items-center justify-center transition-all duration-200 overflow-hidden'
+            : 'rounded-3xl bg-gray-700 text-gray-100 group-hover:cursor-pointer group-hover:rounded-2xl group-hover:bg-brand group-hover:text-white',
+          'flex h-12 w-12 items-center justify-center overflow-hidden transition-all duration-200',
         ]"
+        @click="goToDefChannel()"
       >
         <slot></slot>
       </button>
     </div>
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { computed } from 'vue'
@@ -49,11 +48,15 @@ const isCurrent = computed(() => {
 })
 
 const goToDefChannel = () => {
-  if(!props.id) {
+  if (!props.id) {
     router.push({ path: '/' })
   } else {
     //@ts-ignore
-    router.push({ path: `/server/${props.id}/channels/${dataOfServer.value[props.id].categories[0].channels[0].id}` })
+    router.push({
+      path: `/server/${props.id}/channels/${
+        dataOfServer.value[props.id].categories[0].channels[0].id
+      }`,
+    })
   }
 }
 </script>
