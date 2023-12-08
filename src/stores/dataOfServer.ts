@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker'
 import { IMessage } from './index.interfaces'
 import { useUtils } from '../composables/useUtils'
 
-faker.seed(123)
+faker.seed(10)
 const { getImageUrl } = useUtils()
 
 export const data = {
