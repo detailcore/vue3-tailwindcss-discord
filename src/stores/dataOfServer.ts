@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { faker } from '@faker-js/faker'
+import { fakerRU as faker } from '@faker-js/faker'
 import { IMessage } from './index.interfaces'
 import { useUtils } from '../composables/useUtils'
 
