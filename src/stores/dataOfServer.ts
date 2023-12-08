@@ -271,7 +271,7 @@ function getMessages(): IMessage[] {
   return [...Array(faker.number.int({ min: 7, max: 25 }))]
     .map(() => {
       let user = faker.internet.userName()
-      let avatarUrl = getImageUrl('assets/avatars', `${faker.number.int({ min: 0, max: 25 })}.jpg`)
+      let avatarUrl = getImageUrl('avatars', `${faker.number.int({ min: 0, max: 25 })}.jpg`)
 
       return [...Array(faker.number.int({ min: 1, max: 4 }))].map(() => ({
         id: faker.number.int(),

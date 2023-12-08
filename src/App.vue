@@ -8,7 +8,7 @@
       <hr class="mx-2 border-t-2 border-t-white/[.06]" />
 
       <ServerLink v-for="{ id, img } in servers" :id="id" :key="id">
-        <img :src="getImageUrl('assets/servers', img)" />
+        <img :src="getImageUrl('servers', img)" />
       </ServerLink>
     </div>
 
