@@ -1,0 +1,9 @@
+/node_modules/
+/build/
+/static/
+/tmp/
+/dist/
+
+replace.js
+*.cjs
+**/*.cjs
