@@ -51,9 +51,9 @@ const goToDefChannel = () => {
   if (!props.id) {
     router.push({ path: '/' })
   } else {
-    //@ts-ignore
     router.push({
       path: `/server/${props.id}/channels/${
+        //@ts-ignore
         dataOfServer.value[props.id].categories[0].channels[0].id
       }`,
     })
